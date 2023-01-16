@@ -1,0 +1,161 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "los_crud_api_service_route",
+        "version": "v2.0"
+    },
+    "servers": [
+        {
+            "url": "http://192.168.11.239:8000"
+        }
+    ],
+    "paths": {
+        "/los_crud": {
+            "get": {
+                "tags": [
+                    "los_crud_api_service_route"
+                ],
+                "operationId": "infoAboutGeneralOutlook",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "los_crud_api_service_route"
+                ],
+                "operationId": "generateGeneralOutlook",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Weather"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GeneralOutlook"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "$path1": {
+            "get": {
+                "tags": [
+                    "los_crud_api_service_route"
+                ],
+                "operationId": "whatsTheSenseInThat",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "User": {
+                "type": "object",
+                "properties": {
+                    "age": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "contribution": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "methodOfPayment": {
+                        "type": "string",
+                        "enum": [
+                            "Paypal",
+                            "Bitcoin",
+                            "Unknown"
+                        ]
+                    }
+                }
+            },
+            "Weather": {
+                "type": "object",
+                "properties": {
+                    "postalCode": {
+                        "type": "string"
+                    },
+                    "flagColor": {
+                        "type": "string"
+                    },
+                    "product": {
+                        "type": "string",
+                        "enum": [
+                            "ForecastBasic",
+                            "ForecastProfessional",
+                            "ForecastUltimateXL",
+                            "Unknown"
+                        ]
+                    },
+                    "users": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/User"
+                        }
+                    }
+                }
+            },
+            "GeneralOutlook": {
+                "type": "object",
+                "properties": {
+                    "city": {
+                        "type": "string"
+                    },
+                    "state": {
+                        "type": "string"
+                    },
+                    "weatherStation": {
+                        "type": "string"
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            }
+        }
+    }
+}
